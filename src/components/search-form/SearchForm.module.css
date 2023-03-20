@@ -1,0 +1,23 @@
+.search-block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.input {
+  width: 100%;
+  height: 55px;
+  border: none;
+  padding: 0 20px;
+  margin-right: 15px;
+  border-radius: var(--form-radius);
+  font-size: 19px;
+  outline: none;
+  color: var(--white);
+  background-color: var(--transparent-black);
+}
+
+.input::placeholder {
+  color: var(--gray-light);
+  font-size: var(--font-size-large);
+}

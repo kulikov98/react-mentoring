@@ -1,0 +1,22 @@
+.genreSelect {
+    display: flex;
+    gap: 30px;
+}
+
+.genreSelect input {
+    display: none;
+}
+
+.genreSelect label {
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.genreSelect input:checked ~ label:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin-top: 20px;
+    background-color: var(--pink)
+}
