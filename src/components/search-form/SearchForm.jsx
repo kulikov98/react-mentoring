@@ -19,6 +19,7 @@ const SearchForm = (props) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search"
+        data-testid="search-input"
       />
       <Button
         label="Search"
