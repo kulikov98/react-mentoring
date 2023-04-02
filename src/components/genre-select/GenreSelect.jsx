@@ -2,7 +2,7 @@ import styles from "./GenreSelect.module.css";
 
 const GenreSelect = ({ genres, selected, onSelect }) => {
   return (
-    <div className={styles.genreSelect}>
+    <div className={styles.genreSelect} data-testid="genres">
       {genres.map(({ id, name }) => (
         <div key={id}>
           <input

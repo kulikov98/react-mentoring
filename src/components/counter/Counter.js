@@ -9,11 +9,13 @@ export default class Counter extends Component {
   decrementCount = () => this.setState({ count: this.state.count - 1 });
 
   render() {
-    return createElement("div", null, [
+    return createElement(
+      "div",
+      null,
       "Counter: ",
       createElement("button", { onClick: () => this.incrementCount() }, "+"),
-      createElement("span", null, this.state.count),
-      createElement("button", { onClick: () => this.decrementCount() }, "-"),
-    ]);
+      createElement("span", { "data-testid": "value" }, this.state.count),
+      createElement("button", { onClick: () => this.decrementCount() }, "-")
+    );
   }
 }
