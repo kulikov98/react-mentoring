@@ -1,3 +1,4 @@
+import React from "react";
 import "../src/index.css";
 
 export const parameters = {
@@ -8,4 +9,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: {
+    default: "dark",
+  },
 };
+
+export const decorators = [
+  (Story) => (
+    <div style={{ maxWidth: "1200px" }}>
+      <Story />
+    </div>
+  ),
+];
