@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Dialog from "./Dialog";
+import MovieForm from "../movie-form/MovieForm";
+import movies from "../../testing/movies.json";
+import Button from "../button/Button";
 
 const DialogWrapper = (props) => {
   const [isOpen, setOpen] = useState(false);
@@ -30,5 +33,28 @@ Primary.args = {
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </div>
+  ),
+};
+
+export const AddMovie = Template.bind({});
+AddMovie.args = {
+  title: "Add movie",
+  children: <MovieForm onSubmit={console.log} />,
+};
+
+export const EditMovie = Template.bind({});
+EditMovie.args = {
+  title: "Edit movie",
+  children: <MovieForm movie={movies[0]} onSubmit={console.log} />,
+};
+
+export const DeleteMovie = Template.bind({});
+DeleteMovie.args = {
+  title: "Delete movie",
+  children: (
+    <>
+      <div>Are you sure you want to delete this movie?</div>
+      <Button label="confirm" onClick={console.log} style={{ display: 'block', margin: '50px 0 70px auto' }} />
+    </>
   ),
 };
