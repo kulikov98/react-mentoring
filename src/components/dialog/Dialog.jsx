@@ -12,7 +12,7 @@ const Dialog = ({ title, children, onClose }) => {
   return (
     <div className={styles.dialog}>
       <div ref={contentRef} className={styles.content}>
-        <button className={styles.close} onClick={onClose}></button>
+        <button data-testid="close-btn" className={styles.close} onClick={onClose}></button>
 
         <header className={styles.header}>{title}</header>
 
