@@ -23,7 +23,7 @@ const MultiSelectDropdown = ({ options, selectedOptions, placeholder, onChange }
 
   return (
     <div className={styles.container}>
-      <div className={styles.selectedOptions} onClick={handleToggle}>
+      <div className={styles.selectedOptions} onClick={handleToggle} data-testid="selected-options">
         {selectedOptions.length > 0 ? selectedOptionLabels.join(', ') : placeholder}
         <span className={`${styles.arrow} ${isOpen ? styles.arrowUp : styles.arrowDown}`} />
       </div>
