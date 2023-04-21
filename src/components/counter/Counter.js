@@ -2,7 +2,7 @@ import { Component, createElement } from "react";
 
 export default class Counter extends Component {
   state = {
-    count: +this.props.initialCount,
+    count: +this.props.initialCount || 0,
   };
 
   incrementCount = () => this.setState({ count: this.state.count + 1 });

@@ -1,0 +1,36 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+}
+.tile:hover {
+  transition: opacity 0.2s;
+  cursor: pointer;
+  opacity: 0.8;
+}
+.footer {
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  color: var(--gray-text);
+}
+.description {
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  font-size: var(--font-size-large);
+}
+.genre {
+  margin-top: 8px;
+  font-size: var(--font-size-small);
+  color: var(--gray-text-dark);
+}
+.year {
+  margin-top: 3px;
+}
+.year > span {
+  padding: 5px 10px;
+  border: 1px solid var(--gray-light);
+  border-radius: 3px;
+  font-size: var(--font-size-small);
+}
