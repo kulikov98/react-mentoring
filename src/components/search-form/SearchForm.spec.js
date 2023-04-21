@@ -17,7 +17,7 @@ describe("SearchForm", () => {
     render(<SearchForm query="" onSearch={searchFn} />);
     act(() => {
       userEvent.type(screen.getByTestId("search-input"), text);
-      userEvent.click(screen.getByTestId("search-btn"));
+      userEvent.click(screen.getByTestId("btn"));
     });
 
     expect(searchFn).toHaveBeenCalledWith(text);
