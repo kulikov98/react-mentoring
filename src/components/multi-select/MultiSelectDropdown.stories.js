@@ -31,8 +31,8 @@ export default {
   ],
 };
 
-const Template = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+const Template = ({ selected }) => {
+  const [selectedOptions, setSelectedOptions] = useState(selected ?? []);
 
   const handleSelectChange = (newSelectedOptions) => {
     setSelectedOptions(newSelectedOptions);
@@ -49,3 +49,8 @@ const Template = () => {
 };
 
 export const Default = Template.bind({});
+
+export const WithSelected = Template.bind({});
+WithSelected.args = {
+  selected: [options[0].value, options[1].value]
+};
