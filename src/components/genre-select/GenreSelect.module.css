@@ -14,6 +14,8 @@
 }
 
 .genreSelect input:checked ~ label:after {
+  position: relative;
+  z-index: 1;
   content: "";
   display: block;
   width: 100%;

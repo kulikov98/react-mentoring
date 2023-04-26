@@ -7,6 +7,10 @@
   cursor: pointer;
   opacity: 0.8;
 }
+.tile > img {
+  width: 100%;
+  height: auto;
+}
 .footer {
   display: flex;
   margin-top: 20px;
