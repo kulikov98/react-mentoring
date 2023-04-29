@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import SearchForm from "../search-form/SearchForm";
 import GenreSelect from "../genre-select/GenreSelect";
 import SortControl from "../sort-control/SortControl";
@@ -22,22 +23,33 @@ const Logo = () => (
 );
 
 const MovieListPage = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const [sortCriterion, setSortCriterion] = useState({
-    sortBy: "release_date",
-    sortOrder: "desc",
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("search") ?? ""
+  );
   const [movieList, setMovieList] = useState([]);
-
-  const [activeGenre, setActiveGenre] = useState(genres[0].name);
-
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleSortSelect = (sortBy) => {
     const sortOrder = sortBy === "release_date" ? "desc" : "asc";
-    setSortCriterion({ sortBy, sortOrder });
+    setSearchParams((prev) => {
+      prev.set("sortOrder", sortOrder);
+      prev.set("sortBy", sortBy);
+      return prev;
+    });
   };
+
+  const handleGenreSelect = (name) =>
+    setSearchParams((prev) => {
+      prev.set("genre", name);
+      return prev;
+    });
+
+  const handleSearch = () =>
+    setSearchParams((prev) => {
+      prev.set("search", searchQuery);
+      return prev;
+    });
 
   const handleMovieSelect = (movie) => {
     setSelectedMovie(movie);
@@ -45,24 +57,28 @@ const MovieListPage = () => {
 
   const movieApi = new MovieApi();
 
-  useEffect(() => {
+  const search = () => {
+    const sortBy = searchParams.get("sortBy") ?? "release_date";
+    const sortOrder = sortBy === "release_date" ? "desc" : "asc";
+
     const config = {
       search: searchQuery,
-      searchBy: "title",
-      ...sortCriterion,
-      filter: [activeGenre],
+      searchBy: searchParams.get("title") ?? "title",
+      sortBy,
+      sortOrder,
+      filter: [searchParams.get("genre") ?? genres[0].name],
     };
 
-    (async function () {
-      movieApi.moviesGet(config, (err, data) => {
-        if (err) {
-          // show err;
-          return;
-        }
-        setMovieList(data.data);
-      });
-    })();
-  }, [searchQuery, sortCriterion, activeGenre]);
+    movieApi.moviesGet(config, (err, data) => {
+      if (err) {
+        // show err;
+        return;
+      }
+      setMovieList(data.data);
+    });
+  };
+
+  useEffect(search, [searchParams]);
 
   return (
     <>
@@ -86,7 +102,7 @@ const MovieListPage = () => {
             <SearchForm
               value={searchQuery}
               onChange={setSearchQuery}
-              onSearch={console.log}
+              onSearch={handleSearch}
             />
           </div>
         ) : (
@@ -98,14 +114,14 @@ const MovieListPage = () => {
         <section className={styles.controls}>
           <GenreSelect
             genres={genres}
-            selected={activeGenre}
-            onSelect={setActiveGenre}
+            selected={searchParams.get("genre") ?? genres[0].name}
+            onSelect={handleGenreSelect}
           />
 
           <div className={styles.sort}>
             <span>sort by</span>
             <SortControl
-              preselected={sortCriterion.sortBy}
+              preselected={searchParams.get("sortBy") ?? "release_date"}
               onSelect={handleSortSelect}
             />
           </div>
