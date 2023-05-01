@@ -1,6 +1,7 @@
+import { useLoaderData } from "react-router-dom";
 import styles from "./MovieDetails.module.css";
 
-export const MovieDetails = ({ movie }) => {
+export const MovieDetails = () => {
   const {
     poster_path,
     title,
@@ -9,7 +10,7 @@ export const MovieDetails = ({ movie }) => {
     vote_average,
     runtime,
     overview,
-  } = movie;
+  } = useLoaderData();
 
   return (
     <article className={styles.details} data-testid="movie-details">

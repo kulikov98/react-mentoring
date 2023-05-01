@@ -1,12 +1,15 @@
-import { useSearchParams } from "react-router-dom";
-import SearchForm from "../search-form/SearchForm";
+import { useEffect, useState } from "react";
+import {
+  useSearchParams,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import styles from "./MovieListPage.module.css";
+
 import GenreSelect from "../genre-select/GenreSelect";
 import SortControl from "../sort-control/SortControl";
 import MovieTitle from "../movie-tile/MovieTile";
-import MovieDetails from "../movie-details/MovieDetails";
-import styles from "./MovieListPage.module.css";
-import { useEffect, useState } from "react";
-import MovieApi from "../../open-api/api/MovieApi";
 
 const genres = [
   { name: "documentary", id: "1" },
@@ -22,13 +25,32 @@ const Logo = () => (
   </a>
 );
 
-const MovieListPage = () => {
+const MovieListPage = ({ api }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("search") ?? ""
-  );
   const [movieList, setMovieList] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const defaultParams = {
+    searchBy: "title",
+    sortBy: "release_date",
+    genre: genres[0].name,
+    sortOrder: "desc",
+  };
+
+  const setDefaultParams = () => {
+    Object.entries(defaultParams).map(([key, value]) => {
+      if (searchParams.get(key) === null) {
+        setSearchParams((prev) => {
+          prev.set(key, value);
+          return prev;
+        });
+      }
+    });
+  };
+
+  const hasAbsentParams = () =>
+    Object.keys(defaultParams).find((key) => searchParams.get(key) === null);
 
   const handleSortSelect = (sortBy) => {
     const sortOrder = sortBy === "release_date" ? "desc" : "asc";
@@ -45,31 +67,24 @@ const MovieListPage = () => {
       return prev;
     });
 
-  const handleSearch = () =>
-    setSearchParams((prev) => {
-      prev.set("search", searchQuery);
-      return prev;
-    });
-
-  const handleMovieSelect = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const movieApi = new MovieApi();
+  const handleMovieSelect = (movie) => navigate(`/${movie.id}`);
 
   const search = () => {
-    const sortBy = searchParams.get("sortBy") ?? "release_date";
-    const sortOrder = sortBy === "release_date" ? "desc" : "asc";
+    if (location.pathname !== "/") return;
+
+    if (hasAbsentParams()) {
+      return setDefaultParams();
+    }
 
     const config = {
-      search: searchQuery,
-      searchBy: searchParams.get("title") ?? "title",
-      sortBy,
-      sortOrder,
-      filter: [searchParams.get("genre") ?? genres[0].name],
+      search: searchParams.get("search"),
+      searchBy: defaultParams.searchBy,
+      sortBy: searchParams.get("sortBy"),
+      sortOrder: searchParams.get("sortOrder"),
+      filter: [searchParams.get("genre")],
     };
 
-    movieApi.moviesGet(config, (err, data) => {
+    api.moviesGet(config, (err, data) => {
       if (err) {
         // show err;
         return;
@@ -85,43 +100,32 @@ const MovieListPage = () => {
       <section className={styles.search}>
         <header>
           <Logo />
-          {selectedMovie === null ? (
+          {location.pathname === "/" ? (
             <button className={styles.add}>+ add movie</button>
           ) : (
             <button
               data-testid="search-btn"
               className={styles.searchBtn}
-              onClick={() => setSelectedMovie(null)}
+              onClick={() => navigate("/")}
             ></button>
           )}
         </header>
 
-        {selectedMovie === null ? (
-          <div className={styles.container}>
-            <h1>find your movie</h1>
-            <SearchForm
-              value={searchQuery}
-              onChange={setSearchQuery}
-              onSearch={handleSearch}
-            />
-          </div>
-        ) : (
-          <MovieDetails movie={selectedMovie} />
-        )}
+        <Outlet />
       </section>
 
       <main className={styles.main}>
         <section className={styles.controls}>
           <GenreSelect
             genres={genres}
-            selected={searchParams.get("genre") ?? genres[0].name}
+            selected={searchParams.get("genre") ?? defaultParams.genre}
             onSelect={handleGenreSelect}
           />
 
           <div className={styles.sort}>
             <span>sort by</span>
             <SortControl
-              preselected={searchParams.get("sortBy") ?? "release_date"}
+              preselected={searchParams.get("sortBy") ?? defaultParams.sortBy}
               onSelect={handleSortSelect}
             />
           </div>

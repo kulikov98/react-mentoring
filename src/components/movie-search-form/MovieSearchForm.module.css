@@ -1,0 +1,10 @@
+.container {
+  margin: 60px 120px;
+}
+
+.container > h1 {
+  margin: 0px 0 40px 0;
+  font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
