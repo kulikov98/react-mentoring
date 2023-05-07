@@ -13,6 +13,22 @@ body {
   height: 100%;
 }
 
+.fade-in {
+  animation: fade-in 0.3s forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 :root {
   --white: #fff;
   --black: #232323;
@@ -24,6 +40,8 @@ body {
 
   --gray-light: #555555;
   --gray-dark: #424242;
+  --gray-input: #323232F2;
+
 
   --form-radius: 5px;
 

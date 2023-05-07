@@ -1,0 +1,46 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 3%;
+}
+
+.form > label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--pink);
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.form > label:nth-child(even) {
+  flex-basis: 30%;
+}
+
+.form > label:nth-child(odd) {
+  flex-basis: 67%;
+}
+
+.form > label > input,
+.form > label > textarea {
+  background: var(--gray-input);
+  border-radius: 4px;
+  padding: 18px;
+  border: none;
+  outline: none;
+  color: var(--white);
+}
+
+.form .textarea {
+  width: 100%;
+  flex-basis: unset !important;
+}
+
+.form > footer {
+  margin-left: auto;
+}
+
+.form > footer > button:last-child {
+  margin-left: 10px;
+}

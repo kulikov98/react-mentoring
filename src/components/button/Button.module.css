@@ -1,11 +1,10 @@
 .button {
-  border: 0;
-  border-radius: var(--form-radius);
-  cursor: pointer;
   display: inline-block;
+  border: 1px solid var(--pink);
+  border-radius: var(--form-radius);
   line-height: 1;
-  color: var(--white);
-  background-color: var(--pink);
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -14,10 +13,20 @@
 
 .button--medium {
   font-size: var(--font-size-medium);
-  padding: 14px 41px;
+  padding: 16px 57px;
 }
 
 .button--large {
   font-size: var(--font-size-large);
   padding: 18px 82px;
+}
+
+.button--primary {
+  background-color: var(--pink);
+  color: var(--white);
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--pink);
 }
