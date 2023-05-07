@@ -12,13 +12,13 @@ export const MovieDetails = ({ movie }) => {
   } = movie;
 
   return (
-    <article className={styles.details}>
+    <article className={styles.details} data-testid="movie-details">
       <img data-testid="poster" src={poster_path} alt={`poster of the movie "${title}"`} />
 
       <div className={styles.description}>
         <header className={styles.header}>
           <h1 data-testid="title">{title}</h1>
-          <span data-testid="rating">{vote_average}</span>
+          {vote_average ? <span data-testid="rating">{vote_average}</span> : null}
         </header>
 
         <span data-testid="genres" className={styles.genre}>{genres.join(", ")}</span>
