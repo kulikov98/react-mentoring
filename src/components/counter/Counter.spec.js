@@ -14,12 +14,12 @@ describe("Counter", () => {
   });
 
   it('should decrement the displayed value after clicking on the "decrement" button', async () => {
-    act(() => userEvent.click(screen.getByText('-')));
-    expect(screen.getByTestId('value')).toHaveTextContent(initialValue - 1);
+    act(() => userEvent.click(screen.getByText("-")));
+    expect(screen.getByTestId("value")).toHaveTextContent(initialValue - 1);
   });
 
   it('should increment the displayed value after clicking on the "increment" button', async () => {
-    act(() => userEvent.click(screen.getByText('+')));
-    expect(screen.getByTestId('value')).toHaveTextContent(initialValue + 1);
+    act(() => userEvent.click(screen.getByText("+")));
+    expect(screen.getByTestId("value")).toHaveTextContent(initialValue + 1);
   });
 });

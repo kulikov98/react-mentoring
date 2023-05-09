@@ -1,0 +1,5 @@
+# Ignore artifacts:
+build
+coverage
+open-api
+swagger.yaml

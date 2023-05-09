@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import styles from './MultiSelectDropdown.module.css';
+import React, { useState } from "react";
+import styles from "./MultiSelectDropdown.module.css";
 
-const MultiSelectDropdown = ({ options, selectedOptions, placeholder, onChange }) => {
+const MultiSelectDropdown = ({
+  options,
+  selectedOptions,
+  placeholder,
+  onChange,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -23,9 +28,19 @@ const MultiSelectDropdown = ({ options, selectedOptions, placeholder, onChange }
 
   return (
     <div className={styles.container}>
-      <div className={styles.selectedOptions} onClick={handleToggle} data-testid="selected-options">
-        {selectedOptions.length > 0 ? selectedOptionLabels.join(', ') : placeholder}
-        <span className={`${styles.arrow} ${isOpen ? styles.arrowUp : styles.arrowDown}`} />
+      <div
+        className={styles.selectedOptions}
+        onClick={handleToggle}
+        data-testid="selected-options"
+      >
+        {selectedOptions.length > 0
+          ? selectedOptionLabels.join(", ")
+          : placeholder}
+        <span
+          className={`${styles.arrow} ${
+            isOpen ? styles.arrowUp : styles.arrowDown
+          }`}
+        />
       </div>
       {isOpen && (
         <div className={styles.optionsContainer}>

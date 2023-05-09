@@ -18,11 +18,7 @@ const SearchForm = ({ value, onChange, onSearch }) => {
         placeholder="Search"
         data-testid="search-input"
       />
-      <Button
-        label="Search"
-        size="large"
-        onClick={onSearch}
-      />
+      <Button label="Search" size="large" onClick={onSearch} />
     </div>
   );
 };

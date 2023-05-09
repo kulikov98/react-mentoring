@@ -1,5 +1,5 @@
 import MovieTile from "./MovieTile";
-import movies from '../../testing/movies.json';
+import movies from "../../testing/movies.json";
 
 export default {
   title: "MovieTile",

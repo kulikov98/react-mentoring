@@ -6,10 +6,11 @@ export const SortControl = ({ preselected, onSelect }) => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(preselected);
 
-  const createClass = (name) => cn({
-    [styles[name]]: true,
-    [styles[`${name}--open`]]: open,
-  });
+  const createClass = (name) =>
+    cn({
+      [styles[name]]: true,
+      [styles[`${name}--open`]]: open,
+    });
 
   const options = [
     { name: "Title", value: "title" },
@@ -24,13 +25,21 @@ export const SortControl = ({ preselected, onSelect }) => {
 
   return (
     <div className={styles.select}>
-      <div data-testid="selected" className={createClass('selected')} onClick={() => setOpen(!open)}>
+      <div
+        data-testid="selected"
+        className={createClass("selected")}
+        onClick={() => setOpen(!open)}
+      >
         {options.find((o) => o.value === selected).name}
       </div>
 
-      <ul data-testid="options" className={createClass('options')}>
+      <ul data-testid="options" className={createClass("options")}>
         {options.map((opt) => (
-          <li className={styles.option} key={opt.value} onClick={() => handleClick(opt.value)}>
+          <li
+            className={styles.option}
+            key={opt.value}
+            onClick={() => handleClick(opt.value)}
+          >
             {opt.name}
           </li>
         ))}

@@ -44,3 +44,8 @@
 .form > footer > button:last-child {
   margin-left: 10px;
 }
+
+.error {
+  text-transform: none;
+  color: var(--gray-text);
+}

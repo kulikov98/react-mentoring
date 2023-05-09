@@ -52,5 +52,5 @@ export const Default = Template.bind({});
 
 export const WithSelected = Template.bind({});
 WithSelected.args = {
-  selected: [options[0].value, options[1].value]
+  selected: [options[0].value, options[1].value],
 };

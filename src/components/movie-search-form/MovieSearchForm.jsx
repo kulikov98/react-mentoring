@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import SearchForm from "../search-form/SearchForm";
 import styles from "./MovieSearchForm.module.css";
 
@@ -23,6 +23,7 @@ const MovieSearchForm = () => {
         onChange={setSearchQuery}
         onSearch={handleSearch}
       />
+      <Outlet />
     </div>
   );
 };
