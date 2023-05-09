@@ -1,4 +1,5 @@
 .tile {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -6,6 +7,83 @@
   transition: opacity 0.2s;
   cursor: pointer;
   opacity: 0.8;
+}
+.optionsBtn {
+  position: absolute;
+  z-index: 1;
+  right: 14px;
+  top: 14px;
+  display: flex;
+  justify-content: center;
+  line-height: 11px;
+  background: #2a202d;
+  border: 0;
+  width: 36px;
+  height: 36px;
+  color: white;
+  font-size: 40px;
+  border-radius: 50%;
+  transform: rotate(90deg);
+  letter-spacing: -2px;
+  cursor: pointer;
+}
+.options {
+  position: absolute;
+  z-index: 2;
+  background: #232323ea;
+  right: 14px;
+  top: 14px;
+}
+.options > ul {
+  list-style: none;
+  padding: 0px;
+  margin-top: 25px;
+}
+.options > ul > li {
+  padding: 10px;
+  min-width: 150px;
+  color: white;
+}
+.options > ul > li:hover {
+  background-color: var(--pink);
+}
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  color: white;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.close:before,
+.close:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 14px;
+  height: 1px;
+  background: var(--white);
+  transition: all 0.1s linear;
+}
+
+.close:hover:after,
+.close:hover:before {
+  background: var(--pink);
+}
+
+.close:before {
+  transform: rotate(46deg);
+}
+
+.close:after {
+  transform: rotate(136deg);
 }
 .tile > img {
   width: 100%;

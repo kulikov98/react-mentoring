@@ -54,7 +54,11 @@ DeleteMovie.args = {
   children: (
     <>
       <div>Are you sure you want to delete this movie?</div>
-      <Button label="confirm" onClick={console.log} style={{ display: 'block', margin: '50px 0 70px auto' }} />
+      <Button
+        label="confirm"
+        onClick={console.log}
+        style={{ display: "block", margin: "50px 0 70px auto" }}
+      />
     </>
   ),
 };

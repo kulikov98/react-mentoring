@@ -29,5 +29,5 @@ const Template = (args) => <MovieForm {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   movie: movies[0],
-  onSubmit: console.log
+  onSubmit: console.log,
 };
